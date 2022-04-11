@@ -7,40 +7,16 @@
     <ContentPage.Content>
         <StackLayout Padding="20">
             <StackLayout Orientation="Horizontal">
-                <Image
-                    x:Name="Img1"
-                    HeightRequest="170"
-                    Source="Chudik.png"
-                    WidthRequest="200" />
-                <Image
-                    x:Name="Img2"
-                    HeightRequest="170"
-                    Source="Chudik.png"
-                    WidthRequest="200" />
+                <Image x:Name="Img1" HeightRequest="170" Source="House.png" WidthRequest="200" />
+                <Image x:Name="Img2" HeightRequest="170" Source="House.png" WidthRequest="200" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Image
-                    x:Name="Img3"
-                    HeightRequest="170"
-                    Source="Chudik.png"
-                    WidthRequest="200" />
-                <Image
-                    x:Name="Img4"
-                    HeightRequest="170"
-                    Source="Chudik.png"
-                    WidthRequest="200" />
+                <Image x:Name="Img3" HeightRequest="170" Source="House.png" WidthRequest="200" />
+                <Image x:Name="Img4" HeightRequest="170" Source="House.png" WidthRequest="200" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Image
-                    x:Name="Img5"
-                    HeightRequest="170"
-                    Source="Chudik.png"
-                    WidthRequest="200" />
-                <Image
-                    x:Name="Img6"
-                    HeightRequest="170"
-                    Source="Chudik.png"
-                    WidthRequest="200" />
+                <Image x:Name="Img5" HeightRequest="170" Source="House.png" WidthRequest="200" />
+                <Image x:Name="Img6" HeightRequest="170" Source="House.png" WidthRequest="200" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

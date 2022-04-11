@@ -3,7 +3,7 @@
     x:Class="XamarinMVVM.LoginPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:home"
+    xmlns:local="clr-namespace:XamarinMVVM"
     Visual="Material">
     <StackLayout
         Margin="30,20"
@@ -14,7 +14,7 @@
             Margin="0,0,0,20"
             Aspect="AspectFit"
             Scale="0.9"
-            Source="Resources/image.png" />
+            Source="aplus.png" />
         <StackLayout Spacing="30">
             <Entry
                 x:Name="LoginEntry"
