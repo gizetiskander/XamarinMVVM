@@ -7,7 +7,6 @@ namespace XamarinMVVM
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddProjectPage : ContentPage
     {
-        private string path;
         public AddProjectPage(AddProjectViewModel projectViewModel)
         {
             InitializeComponent();
