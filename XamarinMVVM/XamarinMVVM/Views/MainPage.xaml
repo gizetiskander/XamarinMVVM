@@ -6,20 +6,10 @@
     Visual="Material">
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Label
-                FontSize="21"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand"
-                Text="Проекты"
+            <Label FontSize="21" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Проекты"
                 TextColor="White" />
-            <Label
-                Margin="0,0,19,0"
-                FontFamily="MaterialIconsFont"
-                FontSize="31"
-                HorizontalOptions="End"
-                VerticalOptions="CenterAndExpand"
-                Text="&#xe145;"
-                TextColor="White">
+            <Label Margin="0,0,19,0" FontFamily="MaterialIconsFont" FontSize="31" HorizontalOptions="End" VerticalOptions="CenterAndExpand" 
+                   Text="&#xe145;" TextColor="White">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CreateStudentCommand}" CommandParameter="{Binding}"/>
                 </Label.GestureRecognizers>
@@ -28,13 +18,8 @@
     </NavigationPage.TitleView>
     <StackLayout>
 
-        <ListView
-            x:Name="ProjectsLstview"
-            Margin="0,0"
-            ItemsSource="{Binding Projects}"
-            SelectedItem="{Binding SelectedStudent}" 
-            RowHeight="50"
-            SeparatorColor="Gray">
+        <ListView x:Name="ProjectsLstview" Margin="0,0" ItemsSource="{Binding Projects}" SelectedItem="{Binding SelectedStudent}" 
+                  RowHeight="50" SeparatorColor="Gray">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Name}" TextColor="#000" />
