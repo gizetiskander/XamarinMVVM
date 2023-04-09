@@ -31,7 +31,7 @@
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Button x:Name="CancelBtn" BackgroundColor="LightSkyBlue" Command="{Binding CanselCommand}" CommandParameter="{Binding}" 
+                    <Button x:Name="CancelBtn" BackgroundColor="LightSkyBlue" Command="{Binding CancelCommand}" CommandParameter="{Binding}" 
                             CornerRadius="20" HeightRequest="50" HorizontalOptions="Start" Text="Отмена" WidthRequest="150" />
                     <Button x:Name="AddBtn" BackgroundColor="LightSkyBlue" Command="{Binding SaveCommand}" CommandParameter="{Binding}" 
                             CornerRadius="20" HeightRequest="50" HorizontalOptions="EndAndExpand" Text="Добавить" WidthRequest="150" />

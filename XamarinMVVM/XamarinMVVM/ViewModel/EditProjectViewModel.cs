@@ -6,98 +6,122 @@ using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
+
 namespace XamarinMVVM.ViewModel
 {
-    public class AddProjectViewModel : INotifyPropertyChanged
+    public class EditProjectViewModel : INotifyPropertyChanged
     {
-        public Project Project { get; set; }
+        public Project Projects { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
         public ICommand SaveCommand { protected set; get; }
         public ICommand TakePhotoCommand { protected set; get; }
         public ICommand DoPhotoCommand { protected set; get; }
-        public ICommand CancelCommand { protected set; get; }
+        public ICommand CanselCommand { protected set; get; }
+        public ICommand DeleteCommand { protected set; get; }
         public INavigation Navigation { get; set; }
 
-        public AddProjectViewModel()
+        public EditProjectViewModel()
         {
-            Project = new Project();
+            Projects = new Project();
             SaveCommand = new Command(AddBtn);
-            TakePhotoCommand = new Command(TakePhotoAsync);
-            DoPhotoCommand = new Command(AddImageBtn);
-            CancelCommand = new Command(CancelBtn);
+            TakePhotoCommand = new Command(AddImageBtn);
+            DoPhotoCommand = new Command(TakePhotoAsync);
+            CanselCommand = new Command(CancelBtn);
+            DeleteCommand = new Command(Delete);
         }
 
         public string Name
         {
-            get { return Project.Name; }
+            get { return Projects.Name; }
             set
             {
-                Project.Name = value;
+                Projects.Name = value;
                 OnPropertyChanged("Name");
             }
         }
 
         public string Addres
         {
-            get { return Project.Address; }
+            get { return Projects.Address; }
             set
             {
-                Project.Address = value;
+                Projects.Address = value;
                 OnPropertyChanged("Addres");
             }
         }
 
         public string Email
         {
-            get { return Project.Email; }
+            get { return Projects.Email; }
             set
             {
-                Project.Email = value;
+                Projects.Email = value;
                 OnPropertyChanged("Email");
             }
         }
 
         public string Description
         {
-            get { return Project.Description; }
+            get { return Projects.Description; }
             set
             {
-                Project.Description = value;
+                Projects.Description = value;
                 OnPropertyChanged("Description");
             }
         }
 
         public string TelephoneNumber
         {
-            get { return Project.TelephoneNumber1; }
+            get { return Projects.TelephoneNumber1; }
             set
             {
-                Project.TelephoneNumber1 = value;
+                Projects.TelephoneNumber1 = value;
                 OnPropertyChanged("TelephoneNumber");
             }
         }
 
         public string ImgPath
         {
-            get { return Project.ImagePath; }
+            get { return Projects.ImagePath; }
             set
             {
-                Project.ImagePath = value;
+                Projects.ImagePath = value;
                 OnPropertyChanged("ImgPath");
             }
         }
 
-        private async void CancelBtn()
+        public async void CancelBtn()
         {
             await Navigation.PopAsync();
         }
 
-        private async void AddBtn()
+        public async void Delete()
         {
             try
             {
-                App.db.SaveItem(Project);
+                App.db.DelProj(Projects.Id);
+            }
+            catch
+            {
+
+            }
+            await Navigation.PopAsync();
+        }
+
+        public async void AddBtn()
+        {
+            //List.Projects.Add(new Project(ProjectNameTxt.Text, ProjectDescriptionTxt.Text, TelNumber1Txt.Text, EmailTxt.Text, AddressTxt.Text));
+
+            try
+            {
+               
+                App.db.SaveItem(new Project(Projects.Name, Projects.Description, Projects.TelephoneNumber1, Projects.Email, Projects.Address, Projects.ImagePath));
                 await Navigation.PopAsync();
             }
             catch
@@ -106,7 +130,7 @@ namespace XamarinMVVM.ViewModel
             }
 
         }
-        async void TakePhotoAsync()
+        public async void TakePhotoAsync()
         {
             try
             {
@@ -115,11 +139,13 @@ namespace XamarinMVVM.ViewModel
                     Title = $"xamarin.{DateTime.Now.ToString("dd.MM.yyyy_hh.mm.ss")}.png"
                 });
 
+                // для примера сохраняем файл в локальном хранилище
                 var newFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), photo.FileName);
                 using (var stream = await photo.OpenReadAsync())
                 using (var newStream = File.OpenWrite(newFile))
-                await stream.CopyToAsync(newStream);
+                    await stream.CopyToAsync(newStream);
 
+                // загружаем в ImageView
                 ImgPath = photo.FullPath;
             }
             catch (Exception ex)
@@ -128,10 +154,11 @@ namespace XamarinMVVM.ViewModel
             }
         }
 
-        private async void AddImageBtn()
+        public async void AddImageBtn()
         {
             try
             {
+                // выбираем фото
                 var photo = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
                 {
                     Title = $"xamarin.{DateTime.Now.ToString("dd.MM.yyyy_hh.mm.ss")}.png"
@@ -139,18 +166,13 @@ namespace XamarinMVVM.ViewModel
 
                 var newFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), photo.FileName);
 
+                // загружаем в ImageView
                 ImgPath = photo.FullPath;
             }
             catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayAlert("Сообщение об ошибке", ex.Message, "OK");
             }
-        }
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

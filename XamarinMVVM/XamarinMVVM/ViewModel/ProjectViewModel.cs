@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;
+using XamarinMVVM.Views;
 
 namespace XamarinMVVM.ViewModel
 {
@@ -16,9 +17,13 @@ namespace XamarinMVVM.ViewModel
         public ProjectViewModel() 
         {
             Project = new Project();
+            EditTapCommand = new Command(Edit);
+        }
+        private async void Edit()
+        {
+            await Navigation.PushAsync(new EditProjectPage(new EditProjectViewModel { Projects = Project, Navigation = this.Navigation }));
         }
 
-       
 
         public string Name
         {

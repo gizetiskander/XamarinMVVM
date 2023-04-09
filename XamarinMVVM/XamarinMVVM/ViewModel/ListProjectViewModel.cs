@@ -26,6 +26,7 @@ namespace XamarinMVVM.ViewModel
                 Projects.Add(new ProjectViewModel { Project = item });
             }
             BackCommand = new Command(Back);
+            CreateStudentCommand = new Command(CreateStudent);
         }
 
         public ProjectViewModel SelectedStudent
@@ -49,7 +50,10 @@ namespace XamarinMVVM.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
-      
+        private void CreateStudent()
+        {
+            Navigation.PushAsync(new AddProjectPage(new AddProjectViewModel() { Navigation = this.Navigation }));
+        }
         private void Back()
         {
             Navigation.PopAsync();
